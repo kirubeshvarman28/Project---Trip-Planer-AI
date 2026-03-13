@@ -1,43 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0f172a;
+  --color-foreground: #f8fafc;
+  --color-card: #1e293b;
+  --color-card-foreground: #f8fafc;
+  --color-primary: #3b82f6;
+  --color-primary-foreground: #ffffff;
+  --color-border: #334155;
+  --color-ring: #3b82f6;
+}
 
 @layer base {
-  :root {
-    --background: #0f172a; /* slate-900 */
-    --foreground: #f8fafc; /* slate-50 */
-    --card: #1e293b; /* slate-800 */
-    --card-foreground: #f8fafc;
-    --primary: #3b82f6; /* blue-500 */
-    --primary-foreground: #ffffff;
-    --border: #334155; /* slate-700 */
-    --ring: #3b82f6;
-  }
-
   body {
-    @apply bg-[var(--background)] text-[var(--foreground)] overflow-x-hidden antialiased selection:bg-primary/30;
+    @apply bg-background text-foreground overflow-x-hidden antialiased;
   }
 }
 
-@layer utilities {
-  /* Glassmorphism utility classes */
-  .glass {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-xl;
-  }
-  
-  .glass-card {
-    @apply glass rounded-2xl p-6 transition-all duration-300;
-  }
+@utility glass {
+  background-color: color-mix(in srgb, white, transparent 95%);
+  backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, white, transparent 90%);
+  box-shadow: var(--shadow-xl);
+}
 
-  .glass-panel {
-    @apply glass border-r border-t border-b-0 border-l-0;
-  }
+@utility glass-card {
+  @apply glass rounded-2xl p-6 transition-all duration-300;
+}
 
-  /* Text gradients */
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-500;
-  }
+@utility glass-panel {
+  @apply glass border-r-1 border-t-1 border-b-0 border-l-0;
+}
 
+@utility text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-500;
+}
+
+@layer base {
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
@@ -54,10 +53,17 @@
   }
 }
 
-/* Mapbox overrides to fit dark theme */
-.mapboxgl-popup-content {
-  @apply !bg-slate-800 !text-white !rounded-xl !border !border-white/10 !shadow-2xl;
+/* Leaflet overrides to fit dark theme (replaced Mapbox) */
+.leaflet-popup-content-wrapper {
+  background-color: #1e293b !important;
+  color: white !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid color-mix(in srgb, white, transparent 90%) !important;
+  box-shadow: var(--shadow-2xl) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
 }
-.mapboxgl-popup-tip {
-  @apply !border-t-slate-800;
+
+.leaflet-popup-tip {
+  background-color: #1e293b !important;
 }

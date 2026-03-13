@@ -20,17 +20,31 @@ export default function TripGeneratorForm() {
     e.preventDefault();
     setLoading(true);
     
-    // In a real implementation:
-    // 1. Send formData to backend API to generate trip via OpenAI
-    // 2. Get returned trip ID
-    // 3. Router push to /trip/[id]
-    
-    // Simulating API call
-    setTimeout(() => {
+    try {
+      const savedUser = localStorage.getItem('mockUser');
+      const userId = savedUser ? JSON.parse(savedUser).id : 'anonymous';
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/trips/generate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-id': userId
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate trip');
+      }
+
+      const data = await response.json();
+      router.push(`/trip/${data._id}`);
+    } catch (error) {
+      console.error('Error generating trip:', error);
+      alert('Failed to generate trip. Please make sure the backend is running and you have an OpenAI key set.');
+    } finally {
       setLoading(false);
-      // Let's assume trip ID is 'demo' for now
-      router.push('/trip/demo');
-    }, 2000);
+    }
   };
 
   return (
