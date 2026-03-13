@@ -30,8 +30,8 @@ You need three external accounts to power the AI and database:
 3.  **Settings**:
     *   **Root Directory**: `backend`
     *   **Runtime**: `Node`
-    *   **Build Command**: `npm install && npx tsc`
-    *   **Start Command**: `node dist/index.js`
+    *   **Build Command**: `npm run build`
+    *   **Start Command**: `npm start`
 4.  **Environment Variables**:
     *   `PORT`: `5000`
     *   `MONGO_URI`: (Your MongoDB Atlas connection string)
