@@ -39,8 +39,9 @@ export const requestTripItinerary = async (destination: string, budget: string, 
 
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo', // or gpt-4 if available
+      model: 'gpt-4o-mini',
       messages: [{ role: 'user', content: prompt }],
+      response_format: { type: 'json_object' },
       temperature: 0.7,
     });
 
@@ -53,8 +54,12 @@ export const requestTripItinerary = async (destination: string, budget: string, 
     // Try to parse the JSON
     return JSON.parse(content);
 
-  } catch (error) {
-    console.error('Error with OpenAI iteration generation:', error);
+  } catch (error: any) {
+    if (error.status === 401) {
+      console.error('CRITICAL: Your OpenAI API key is invalid or expired.');
+    } else {
+      console.error('Error with OpenAI iteration generation:', error.message || error);
+    }
     throw new Error('Failed to generate trip itinerary');
   }
 };

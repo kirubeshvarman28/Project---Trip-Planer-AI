@@ -28,7 +28,7 @@ export default function RootLayout({
     // Simulate API delay
     setTimeout(() => {
       const mockUser = {
-        id: 'user_local_123',
+        id: '507f1f77bcf86cd799439011',
         name: 'Local Explorer'
       };
       localStorage.setItem('mockUser', JSON.stringify(mockUser));
