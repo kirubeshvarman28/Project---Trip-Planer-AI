@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #0f172a; /* slate-900 */
+    --foreground: #f8fafc; /* slate-50 */
+    --card: #1e293b; /* slate-800 */
+    --card-foreground: #f8fafc;
+    --primary: #3b82f6; /* blue-500 */
+    --primary-foreground: #ffffff;
+    --border: #334155; /* slate-700 */
+    --ring: #3b82f6;
+  }
+
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] overflow-x-hidden antialiased selection:bg-primary/30;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism utility classes */
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-xl;
+  }
+  
+  .glass-card {
+    @apply glass rounded-2xl p-6 transition-all duration-300;
+  }
+
+  .glass-panel {
+    @apply glass border-r border-t border-b-0 border-l-0;
+  }
+
+  /* Text gradients */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-500;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/20 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/30;
+  }
+}
+
+/* Mapbox overrides to fit dark theme */
+.mapboxgl-popup-content {
+  @apply !bg-slate-800 !text-white !rounded-xl !border !border-white/10 !shadow-2xl;
+}
+.mapboxgl-popup-tip {
+  @apply !border-t-slate-800;
+}
