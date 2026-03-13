@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import Trip from '../models/Trip';
-import { requestTripItinerary } from '../services/openaiService';
+import type { Request, Response } from 'express';
+import Trip from '../models/Trip.js';
+import { requestTripItinerary } from '../services/openaiService.js';
 import mongoose from 'mongoose';
 
 export const getTrips = async (req: Request, res: Response) => {

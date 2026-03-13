@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import User from '../models/User';
+import type { Request, Response } from 'express';
+import User from '../models/User.js';
 
 // Dummy implementation for simple testing/development
 // In production, you would verify the Google access token here using google-auth-library

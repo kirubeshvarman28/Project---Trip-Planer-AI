@@ -4,8 +4,8 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import tripRoutes from './routes/tripRoutes';
-import authRoutes from './routes/authRoutes';
+import tripRoutes from './routes/tripRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 
